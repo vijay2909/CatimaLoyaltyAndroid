@@ -2,8 +2,6 @@ package protect.card_locker;
 
 import android.app.Activity;
 import android.app.SearchManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +48,7 @@ import protect.card_locker.databinding.MainActivityBinding;
 import protect.card_locker.databinding.SortingOptionBinding;
 import protect.card_locker.preferences.Settings;
 import protect.card_locker.preferences.SettingsActivity;
+import protect.card_locker.screens.ScanActivity;
 
 public class MainActivity extends CatimaAppCompatActivity implements LoyaltyCardCursorAdapter.CardAdapterListener {
     private MainActivityBinding binding;
@@ -222,7 +221,8 @@ public class MainActivity extends CatimaAppCompatActivity implements LoyaltyCard
                     if (!file.delete()) {
                         Log.w(TAG, "Failed to delete cache file " + file.getPath());
                     }
-                };
+                }
+                ;
             }
         }).start();
 
@@ -619,11 +619,10 @@ public class MainActivity extends CatimaAppCompatActivity implements LoyaltyCard
                     mFilter = newText;
                     // New logic to ensure search history after coming back from picked card - user will see the last search query
                     if (newText.isEmpty()) {
-                        if(!finalQuery.isEmpty()){
+                        if (!finalQuery.isEmpty()) {
                             // Setting the query text for user after coming back from picked card from finalQuery
                             mSearchView.setQuery(finalQuery, false);
-                        }
-                        else if(!currentQuery.isEmpty()){
+                        } else if (!currentQuery.isEmpty()) {
                             // Else if is needed in case user deletes search - expected behaviour is to show all cards
                             currentQuery = "";
                             mSearchView.setQuery(currentQuery, false);
@@ -641,7 +640,7 @@ public class MainActivity extends CatimaAppCompatActivity implements LoyaltyCard
                 }
             });
             // Check if we came from a picked card back to search, in that case we want to show the search view with previous search query
-            if(!finalQuery.isEmpty()){
+            if (!finalQuery.isEmpty()) {
                 // Expand the search view to show the query
                 searchMenuItem.expandActionView();
                 // Setting the query text to empty String due to behaviour of onQueryTextChange after coming back from picked card - onQueryTextChange is called automatically without users interaction
@@ -776,7 +775,7 @@ public class MainActivity extends CatimaAppCompatActivity implements LoyaltyCard
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int screenHeight = displayMetrics.heightPixels;
-        float mediumSizePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,MEDIUM_SCALE_FACTOR_DIP,getResources().getDisplayMetrics());
+        float mediumSizePx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, MEDIUM_SCALE_FACTOR_DIP, getResources().getDisplayMetrics());
         boolean shouldScaleSmaller = screenHeight < mediumSizePx;
 
         binding.include.welcomeIcon.setVisibility(shouldScaleSmaller ? View.GONE : View.VISIBLE);

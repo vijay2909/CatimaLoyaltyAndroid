@@ -133,7 +133,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScanActivity"
+            android:name=".screens.ScanActivity"
             android:label="@string/scanCardBarcode"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

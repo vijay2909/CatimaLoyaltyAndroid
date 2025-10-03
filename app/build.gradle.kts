@@ -146,10 +146,11 @@ dependencies {
 
     androidTestImplementation("androidx.test:core:$androidXTestVersion")
     androidTestImplementation("junit:junit:$junitVersion")
-    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    testImplementation("androidx.test.ext:junit-ktx:1.3.0")
     androidTestImplementation("androidx.test:runner:$androidXTestVersion")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    testImplementation("androidx.test.espresso:espresso-core:3.7.0")
+    testImplementation("androidx.test.espresso:espresso-intents:3.7.0")
 }
 
 tasks.register("copyRawResFiles", Copy::class) {

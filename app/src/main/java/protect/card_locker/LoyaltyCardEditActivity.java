@@ -44,9 +44,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.exifinterface.media.ExifInterface;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -89,6 +86,7 @@ import java.util.concurrent.Callable;
 import protect.card_locker.async.TaskHandler;
 import protect.card_locker.databinding.LayoutChipChoiceBinding;
 import protect.card_locker.databinding.LoyaltyCardEditActivityBinding;
+import protect.card_locker.screens.ScanActivity;
 import protect.card_locker.viewmodels.LoyaltyCardEditActivityViewModel;
 
 public class LoyaltyCardEditActivity extends CatimaAppCompatActivity implements BarcodeImageWriterResultCallback, ColorPickerDialogListener {
@@ -1129,7 +1127,7 @@ public class LoyaltyCardEditActivity extends CatimaAppCompatActivity implements 
         Intent contentIntent = new Intent(Intent.ACTION_GET_CONTENT);
         contentIntent.setType("image/*");
         Intent chooserIntent = Intent.createChooser(photoPickerIntent, getString(R.string.addFromImage));
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { contentIntent });
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{contentIntent});
 
         try {
             mPhotoPickerLauncher.launch(chooserIntent);
@@ -1575,9 +1573,9 @@ public class LoyaltyCardEditActivity extends CatimaAppCompatActivity implements 
             }
         }
         Intent ucropIntent = UCrop.of(
-                sourceUri,
-                destUri
-        ).withOptions(mCropperOptions)
+                        sourceUri,
+                        destUri
+                ).withOptions(mCropperOptions)
                 .getIntent(this);
         ucropIntent.setClass(this, UCropWrapper.class);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
